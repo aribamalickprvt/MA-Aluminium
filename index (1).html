@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MA Aluminium and Glass — Premium Aluminium Windows & Glass</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #F5C400;
+      --yellow-light: #FFD940;
+      --yellow-dark: #C49A00;
+      --black: #0A0A0A;
+      --black-mid: #141414;
+      --black-soft: #1C1C1C;
+      --black-card: #222222;
+      --gray: #888888;
+      --white: #F9F9F9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    * { cursor: none !important; }
+    #cursor {
+      width: 14px; height: 14px;
+      background: var(--yellow);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.2s;
+      transform: translate(-50%, -50%);
+    }
+    #cursor-ring {
+      width: 38px; height: 38px;
+      border: 1.5px solid var(--yellow);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+      transition: transform 0.35s ease, opacity 0.3s;
+      transform: translate(-50%, -50%);
+    }
+    body:hover #cursor { opacity: 1; }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.35;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .font-display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em; }
+    .font-condensed { font-family: 'Barlow Condensed', sans-serif; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(245,196,0,0.15);
+    }
+    .nav-link {
+      position: relative;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--yellow);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: var(--yellow); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(10,10,10,0.97) 40%, rgba(245,196,0,0.08) 100%),
+        url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, var(--black) 100%);
+    }
+    .hero-grid-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(245,196,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,196,0,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .yellow-bar {
+      display: inline-block;
+      width: 5px; height: 100%;
+      background: var(--yellow);
+      margin-right: 18px;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+    }
+    .hero-title span { color: var(--yellow); }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,196,0,0.1);
+      border: 1px solid rgba(245,196,0,0.3);
+      padding: 6px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      border-radius: 2px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 34px;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.15);
+      transform: skewX(-20deg);
+      transition: left 0.4s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(245,196,0,0.35); }
+    .btn-primary:hover::before { left: 120%; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1.5px solid rgba(245,196,0,0.5);
+      color: var(--yellow);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 32px;
+      transition: all 0.3s;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: rgba(245,196,0,0.1);
+      border-color: var(--yellow);
+      box-shadow: 0 0 20px rgba(245,196,0,0.15);
+    }
+
+    /* ── STAT TICKER ── */
+    .stat-ticker {
+      background: var(--yellow);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      padding: 12px 40px;
+      display: inline-flex; align-items: center; gap: 20px;
+    }
+    .ticker-dot { width: 6px; height: 6px; background: var(--black); border-radius: 50%; opacity: 0.4; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 2px;
+      background: var(--yellow);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .section-title span { color: var(--yellow); }
+
+    /* ── CARDS ── */
+    .service-card {
+      background: var(--black-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s, box-shadow 0.4s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245,196,0,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 56px; height: 56px;
+      background: rgba(245,196,0,0.1);
+      border: 1px solid rgba(245,196,0,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background: rgba(245,196,0,0.2);
+    }
+
+    /* ── GALLERY ── */
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      background: var(--black-card);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.6s;
+      filter: grayscale(20%) brightness(0.85);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: grayscale(0%) brightness(1);
+    }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-label {
+      position: absolute; bottom: 16px; left: 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      transform: translateY(8px);
+      opacity: 0;
+      transition: transform 0.4s, opacity 0.4s;
+    }
+    .gallery-item:hover .gallery-label { transform: translateY(0); opacity: 1; }
+
+    /* ── WHY US ── */
+    .why-card {
+      border-left: 2px solid rgba(245,196,0,0.2);
+      padding-left: 24px;
+      transition: border-color 0.3s;
+    }
+    .why-card:hover { border-left-color: var(--yellow); }
+    .counter-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    /* ── PROCESS STEPS ── */
+    .process-step {
+      position: relative;
+    }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: rgba(245,196,0,0.08);
+      line-height: 1;
+      position: absolute;
+      top: -10px; right: 0;
+    }
+    .step-dot {
+      width: 12px; height: 12px;
+      background: var(--yellow);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-card {
+      background: var(--black-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .quote-mark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--yellow);
+      opacity: 0.15;
+      line-height: 0.7;
+    }
+    .stars { color: var(--yellow); font-size: 0.9rem; letter-spacing: 2px; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background:
+        linear-gradient(135deg, rgba(245,196,0,0.06) 0%, transparent 60%),
+        var(--black-mid);
+      border-top: 1px solid rgba(245,196,0,0.1);
+      border-bottom: 1px solid rgba(245,196,0,0.1);
+    }
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      transition: all 0.3s;
+      box-shadow: 0 0 0 0 rgba(37,211,102,0.4);
+    }
+    .whatsapp-btn:hover {
+      box-shadow: 0 0 30px rgba(37,211,102,0.4);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black-mid);
+      border-top: 1px solid rgba(245,196,0,0.08);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.04em;
+    }
+    .footer-link {
+      color: #888;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .footer-link:hover { color: var(--yellow); }
+    .social-icon {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: all 0.3s;
+      color: #888;
+    }
+    .social-icon:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+      background: rgba(245,196,0,0.08);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0; transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* Stagger delays */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(10,10,10,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    #mobile-menu.open { display: flex; }
+    .mobile-nav-link {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      transition: color 0.2s;
+    }
+    .mobile-nav-link:hover { color: var(--yellow); }
+
+    /* ── FLOATING WA BUTTON ── */
+    .float-wa {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      z-index: 900;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      animation: pulse-wa 2.5s ease infinite;
+      transition: transform 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.1); }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+    }
+
+    /* Diagonal section divider */
+    .diagonal-top {
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      padding-bottom: 60px;
+    }
+    .diagonal-bottom {
+      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+      padding-top: 60px;
+    }
+
+    /* Yellow glow line */
+    .glow-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/923001234567" target="_blank" class="float-wa" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="navbar" class="py-5 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2">
+      <img src="PHOTOS/logo.jpeg" alt="logo" style="width:42px; height:42px; object-fit:cover; border-radius:4px;">
+      <span style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.05em; color:var(--white); line-height:1;">
+        MA <span style="color:var(--yellow);">ALUMINIUM AND GLASS</span>
+      </span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-10">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#why-us" class="nav-link">Why Us</a>
+      <a href="#process" class="nav-link">Process</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="#contact" class="hidden md:inline-flex btn-primary text-sm py-3 px-6">Get a Quote</a>
+      <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <span class="block w-6 h-0.5" style="background:var(--yellow)"></span>
+        <span class="block w-6 h-0.5" style="background:var(--yellow)"></span>
+        <span class="block w-4 h-0.5" style="background:var(--yellow)"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <button id="menu-close" class="absolute top-7 right-7 text-3xl" style="color:var(--yellow)">✕</button>
+  <a href="#services" class="mobile-nav-link">Services</a>
+  <a href="#gallery" class="mobile-nav-link">Gallery</a>
+  <a href="#why-us" class="mobile-nav-link">Why Us</a>
+  <a href="#process" class="mobile-nav-link">Process</a>
+  <a href="#contact" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-24 w-full">
+    <div class="max-w-4xl">
+
+      <div class="badge mb-8 reveal">
+        <span>⬡</span> Trusted Since 2021 — Lahore, Pakistan
+      </div>
+
+      <div class="flex items-stretch gap-5 mb-2 reveal delay-1">
+        <div class="w-1.5 rounded-full flex-shrink-0" style="background:var(--yellow); min-height:100%"></div>
+        <h1 class="hero-title">
+          Crafted in<br/>
+          <span>Aluminium.</span><br/>
+          Built to Last.
+        </h1>
+      </div>
+
+      <p class="text-lg mt-8 mb-10 max-w-xl reveal delay-2"
+         style="color:#aaa; font-weight:300; line-height:1.8;">
+        We design and install premium aluminium windows and crystal-clear glass solutions that transform every space — with
+        <em style="color:var(--yellow-light); font-style:normal;">unmatched precision</em>, honest pricing, and craftsmanship that stands the test of time.
+      </p>
+
+      <div class="flex flex-wrap gap-4 reveal delay-3">
+        <a href="https://wa.me/923221233042" target="_blank" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp Us Now
+        </a>
+        <a href="#gallery" class="btn-outline">View Our Work</a>
+      </div>
+
+      <!-- Micro stats -->
+      <div class="flex flex-wrap gap-8 mt-16 reveal delay-4">
+        <div>
+          <div class="font-display text-4xl" style="color:var(--yellow)">500+</div>
+          <div class="text-sm" style="color:#666; font-weight:300">Projects Done</div>
+        </div>
+        <div class="w-px" style="background:rgba(255,255,255,0.08)"></div>
+        <div>
+          <div class="font-display text-4xl" style="color:var(--yellow)">15+</div>
+          <div class="text-sm" style="color:#666; font-weight:300">Years Experience</div>
+        </div>
+        <div class="w-px" style="background:rgba(255,255,255,0.08)"></div>
+        <div>
+          <div class="font-display text-4xl" style="color:var(--yellow)">100%</div>
+          <div class="text-sm" style="color:#666; font-weight:300">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+    <span class="font-condensed text-xs tracking-widest uppercase" style="color:#555">Scroll</span>
+    <div class="w-px h-10 relative overflow-hidden" style="background:rgba(255,255,255,0.1)">
+      <div class="absolute top-0 w-full" style="height:40%;background:var(--yellow);animation:scrollLine 1.5s ease infinite"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+</style>
+
+<!-- ═══════════ TICKER ═══════════ -->
+<div class="stat-ticker py-0 overflow-hidden">
+  <div class="ticker-track">
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item">Premium Aluminium Windows <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Double Glass Panels <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Sliding & Casement Frames <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Custom Sizes Available <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Free Site Visit <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Honest Pricing Always <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Trusted by 100+ Families <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Premium Aluminium Windows <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Double Glass Panels <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Sliding & Casement Frames <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Custom Sizes Available <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Free Site Visit <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Honest Pricing Always <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Trusted by 100+ Families <span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section id="services" class="py-28 px-6 md:px-12" style="background:var(--black-mid)">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16">
+      <div class="section-label mb-4 reveal">Our Specialties</div>
+      <h2 class="section-title reveal delay-1">What We <span>Craft</span><br/>For You</h2>
+      <p class="mt-5 max-w-xl reveal delay-2" style="color:#888; font-weight:300; line-height:1.8;">
+        Every project is treated with the care of a master craftsman. We don't just install windows — we engineer light, privacy, and beauty into your space.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div class="service-card p-8 reveal delay-1">
+        <div class="service-icon mb-6">🪟</div>
+        <div class="step-num">01</div>
+        <h3 class="font-display text-2xl mb-3">Aluminium Windows</h3>
+        <p style="color:#777; font-weight:300; line-height:1.8; font-size:0.95rem;">
+          Powder-coated, corrosion-resistant aluminium frames in any size or profile. Built for decades of flawless performance.
+        </p>
+        <div class="glow-line mt-8"></div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card p-8 reveal delay-2">
+        <div class="service-icon mb-6">🔲</div>
+        <div class="step-num">02</div>
+        <h3 class="font-display text-2xl mb-3">Glass Fitting & Glazing</h3>
+        <p style="color:#777; font-weight:300; line-height:1.8; font-size:0.95rem;">
+          Toughened, frosted, tinted, and double-pane glass options. Professionally sealed for maximum insulation and clarity.
+        </p>
+        <div class="glow-line mt-8"></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card p-8 reveal delay-3">
+        <div class="service-icon mb-6">🚪</div>
+        <div class="step-num">03</div>
+        <h3 class="font-display text-2xl mb-3">Sliding Door Systems</h3>
+        <p style="color:#777; font-weight:300; line-height:1.8; font-size:0.95rem;">
+          Smooth-gliding aluminium sliding doors for balconies, patios, and room dividers — modern aesthetics, effortless operation.
+        </p>
+        <div class="glow-line mt-8"></div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card p-8 reveal delay-1">
+        <div class="service-icon mb-6">🏗️</div>
+        <div class="step-num">04</div>
+        <h3 class="font-display text-2xl mb-3">Custom Frame Fabrication</h3>
+        <p style="color:#777; font-weight:300; line-height:1.8; font-size:0.95rem;">
+          Non-standard shapes? No problem. We fabricate bespoke frames for arched, angled, and uniquely shaped openings.
+        </p>
+        <div class="glow-line mt-8"></div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card p-8 reveal delay-2">
+        <div class="service-icon mb-6">🛡️</div>
+        <div class="step-num">05</div>
+        <h3 class="font-display text-2xl mb-3">Safety Grilles & Mesh</h3>
+        <p style="color:#777; font-weight:300; line-height:1.8; font-size:0.95rem;">
+          Decorative yet strong aluminium grilles and security mesh. Style that doesn't sacrifice protection.
+        </p>
+        <div class="glow-line mt-8"></div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card p-8 reveal delay-3">
+        <div class="service-icon mb-6">🔧</div>
+        <div class="step-num">06</div>
+        <h3 class="font-display text-2xl mb-3">Repair & Maintenance</h3>
+        <p style="color:#777; font-weight:300; line-height:1.8; font-size:0.95rem;">
+          Old windows rattling? Glass cracked? We repair and restore to original quality — fast, reliable, and affordable.
+        </p>
+        <div class="glow-line mt-8"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section id="gallery" class="py-28 px-6 md:px-12" style="background:var(--black)">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div>
+        <div class="section-label mb-4 reveal">Our Portfolio</div>
+        <h2 class="section-title reveal delay-1">Work That <span>Speaks</span><br/>For Itself</h2>
+      </div>
+      <p class="max-w-xs reveal delay-2" style="color:#666; font-weight:300; line-height:1.8; font-size:0.9rem;">
+        Each image tells a story of precision, trust, and craftsmanship delivered on time, every time.
+      </p>
+    </div>
+
+    <!-- Masonry-style grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="gallery-item col-span-2 md:col-span-1 row-span-2 reveal" style="height:420px;">
+        <img src="PHOTOS/sliding windows.jpeg" alt="Aluminium Window Project 1" />
+        <div class="gallery-overlay"></div>
+        <div class="gallery-label">Sliding Window System</div>
+      </div>
+      <div class="gallery-item reveal delay-1" style="height:200px;">
+        <img src="PHOTOS/double.jpeg" alt="Glass Fitting" />
+        <div class="gallery-overlay"></div>
+        <div class="gallery-label">Double-Pane Glass</div>
+      </div>
+      <div class="gallery-item reveal delay-2" style="height:200px;">
+        <img src="PHOTOS/b8b2654eead28f932cb48d2e503bd53f.jpg" alt="Modern Window" />
+        <div class="gallery-overlay"></div>
+        <div class="gallery-label">Casement Frame</div>
+      </div>
+      <div class="gallery-item reveal delay-1" style="height:210px;">
+        <img src="PHOTOS/black tinted.jpeg" alt="Window Installation" />
+        <div class="gallery-overlay"></div>
+        <div class="gallery-label">Tinted Glass Panel</div>
+      </div>
+      <div class="gallery-item reveal delay-2" style="height:210px;">
+        <img src="PHOTOS/door.jpeg" alt="Interior Window" />
+        <div class="gallery-overlay"></div>
+        <div class="gallery-label">Door</div>
+      </div>
+      <div class="gallery-item col-span-2 md:col-span-1 reveal delay-3" style="height:220px;">
+        <img src="PHOTOS/full.jpeg" alt="Home Windows" />
+        <div class="gallery-overlay"></div>
+        <div class="gallery-label">Full Home Installation</div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 reveal">
+      <a href="https://wa.me/923221233042?text=I%20want%20to%20see%20more%20of%20your%20work" target="_blank" class="btn-outline">
+        See More on WhatsApp →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHY US ═══════════ -->
+<section id="why-us" class="py-28 px-6 md:px-12" style="background:var(--black-mid)">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+      <div>
+        <div class="section-label mb-4 reveal-left">Why Choose Us</div>
+        <h2 class="section-title mb-8 reveal-left delay-1">
+          Quality You Can<br/><span>See and Feel.</span><br/>
+          <span style="color:var(--white)">Honesty You Can</span><br/><span>Count On.</span>
+        </h2>
+        <p class="mb-10 reveal-left delay-2" style="color:#888; font-weight:300; line-height:1.9;">
+          We've been building lasting relationships — one window at a time. Our reputation is our greatest asset, and we protect it by delivering exactly what we promise, on time and within budget.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="why-card reveal-left delay-1">
+            <div class="font-condensed font-bold text-sm tracking-widest uppercase mb-2" style="color:var(--yellow)">Premium Materials</div>
+            <p style="color:#777; font-size:0.9rem; line-height:1.7;">We only use certified aluminium profiles and safety-grade glass. No shortcuts, ever.</p>
+          </div>
+          <div class="why-card reveal-left delay-2">
+            <div class="font-condensed font-bold text-sm tracking-widest uppercase mb-2" style="color:var(--yellow)">Transparent Pricing</div>
+            <p style="color:#777; font-size:0.9rem; line-height:1.7;">What we quote is what you pay. No hidden charges, no last-minute surprises.</p>
+          </div>
+          <div class="why-card reveal-left delay-3">
+            <div class="font-condensed font-bold text-sm tracking-widest uppercase mb-2" style="color:var(--yellow)">On-Time Delivery</div>
+            <p style="color:#777; font-size:0.9rem; line-height:1.7;">We respect your time. Projects are completed on the agreed date without compromise.</p>
+          </div>
+          <div class="why-card reveal-left delay-4">
+            <div class="font-condensed font-bold text-sm tracking-widest uppercase mb-2" style="color:var(--yellow)">After-Sales Support</div>
+            <p style="color:#777; font-size:0.9rem; line-height:1.7;">Any issue post-installation? We're one message away. Our commitment doesn't end at delivery.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats panel -->
+      <div class="grid grid-cols-2 gap-6 reveal-right">
+        <div class="p-8" style="background:var(--black-card); border:1px solid rgba(245,196,0,0.1)">
+          <div class="counter-num" data-target="100">0</div>
+          <div class="font-condensed font-bold text-sm tracking-widest uppercase mt-2" style="color:#666">Projects Completed</div>
+        </div>
+        <div class="p-8 mt-8" style="background:var(--yellow)">
+          <div class="font-display text-5xl text-black">5+</div>
+          <div class="font-condensed font-bold text-sm tracking-widest uppercase mt-2 text-black opacity-70">Years of Excellence</div>
+        </div>
+        <div class="p-8 -mt-4" style="background:var(--yellow)">
+          <div class="font-display text-5xl text-black">100%</div>
+          <div class="font-condensed font-bold text-sm tracking-widest uppercase mt-2 text-black opacity-70">Honest Pricing</div>
+        </div>
+        <div class="p-8" style="background:var(--black-card); border:1px solid rgba(245,196,0,0.1)">
+          <div class="counter-num" data-target="200">0</div>
+          <div class="font-condensed font-bold text-sm tracking-widest uppercase mt-2" style="color:#666">Happy Families</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROCESS ═══════════ -->
+<section id="process" class="py-28 px-6 md:px-12" style="background:var(--black)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <div class="section-label justify-center mb-4 reveal">How We Work</div>
+      <h2 class="section-title reveal delay-1">Simple Process,<br/><span>Exceptional Result</span></h2>
+      <p class="mt-5 max-w-lg mx-auto reveal delay-2" style="color:#666; font-weight:300; line-height:1.8;">
+        Getting your dream windows shouldn't be complicated. We keep it simple and stress-free from start to finish.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <div class="process-step p-6 reveal delay-1" style="background:var(--black-card); border:1px solid rgba(255,255,255,0.05)">
+        <div class="step-num">01</div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-dot"></div>
+          <div class="font-condensed font-bold text-xs tracking-widest uppercase" style="color:var(--yellow)">Step 01</div>
+        </div>
+        <div class="text-3xl mb-4">💬</div>
+        <h3 class="font-display text-xl mb-3">Contact Us</h3>
+        <p style="color:#666; font-size:0.9rem; line-height:1.7;">Reach out via WhatsApp, Facebook, or a call. Tell us what you need — we listen carefully.</p>
+      </div>
+
+      <div class="process-step p-6 reveal delay-2" style="background:var(--black-card); border:1px solid rgba(255,255,255,0.05)">
+        <div class="step-num">02</div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-dot"></div>
+          <div class="font-condensed font-bold text-xs tracking-widest uppercase" style="color:var(--yellow)">Step 02</div>
+        </div>
+        <div class="text-3xl mb-4">📐</div>
+        <h3 class="font-display text-xl mb-3">Site Visit & Measure</h3>
+        <p style="color:#666; font-size:0.9rem; line-height:1.7;">We visit your location, take exact measurements, and assess what solution fits best.</p>
+      </div>
+
+      <div class="process-step p-6 reveal delay-3" style="background:var(--black-card); border:1px solid rgba(255,255,255,0.05)">
+        <div class="step-num">03</div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-dot"></div>
+          <div class="font-condensed font-bold text-xs tracking-widest uppercase" style="color:var(--yellow)">Step 03</div>
+        </div>
+        <div class="text-3xl mb-4">🧾</div>
+        <h3 class="font-display text-xl mb-3">Quote & Confirm</h3>
+        <p style="color:#666; font-size:0.9rem; line-height:1.7;">You get a clear, itemized quote. No jargon. No hidden costs. Just straight-up fair pricing.</p>
+      </div>
+
+      <div class="process-step p-6 reveal delay-4" style="background:var(--black-card); border:1px solid rgba(255,255,255,0.05)">
+        <div class="step-num">04</div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-dot"></div>
+          <div class="font-condensed font-bold text-xs tracking-widest uppercase" style="color:var(--yellow)">Step 04</div>
+        </div>
+        <div class="text-3xl mb-4">✅</div>
+        <h3 class="font-display text-xl mb-3">Fabricate & Install</h3>
+        <p style="color:#666; font-size:0.9rem; line-height:1.7;">We craft your order with care and install it to perfection. Cleanly, professionally, on time.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section id="testimonials" class="py-28 px-6 md:px-12" style="background:var(--black-mid)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="section-label justify-center mb-4 reveal">Client Stories</div>
+      <h2 class="section-title reveal delay-1">Words From<br/><span>Those Who Know</span></h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="testimonial-card p-8 reveal delay-1">
+        <div class="quote-mark">"</div>
+        <p class="mt-2 mb-6" style="color:#aaa; font-weight:300; line-height:1.9; font-size:0.95rem;">
+          Absolutely incredible work. The aluminium frames are flawless and the team cleaned up after themselves. I've already recommended them to five neighbours. Best in Lahore, hands down.
+        </p>
+        <div class="stars mb-3">★★★★★</div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-display text-lg" style="background:var(--yellow); color:var(--black)">A</div>
+          <div>
+            <div class="font-condensed font-bold text-sm">Ahmad Raza</div>
+            <div class="text-xs" style="color:#555">DHA, Lahore</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card p-8 reveal delay-2">
+        <div class="quote-mark">"</div>
+        <p class="mt-2 mb-6" style="color:#aaa; font-weight:300; line-height:1.9; font-size:0.95rem;">
+          They quoted a price and that's exactly what I paid. No drama, no extra charges. The glass quality is superb tinted panels in my living room look like they belong in a magazine.
+        </p>
+        <div class="stars mb-3">★★★★★</div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-display text-lg" style="background:var(--yellow); color:var(--black)">S</div>
+          <div>
+            <div class="font-condensed font-bold text-sm">Sana Mirza</div>
+            <div class="text-xs" style="color:#555">Gulberg, Lahore</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card p-8 reveal delay-3">
+        <div class="quote-mark">"</div>
+        <p class="mt-2 mb-6" style="color:#aaa; font-weight:300; line-height:1.9; font-size:0.95rem;">
+          I needed sliding doors for my entire ground floor. The project was done in two days  ahead of schedule! The finish is perfect. Truly professional craftsmen with genuine honesty.
+        </p>
+        <div class="stars mb-3">★★★★★</div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-display text-lg" style="background:var(--yellow); color:var(--black)">U</div>
+          <div>
+            <div class="font-condensed font-bold text-sm">Usman Tariq</div>
+            <div class="text-xs" style="color:#555">Model Town, Lahore</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section id="contact" class="cta-section py-28 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="section-label justify-center mb-6 reveal">Let's Work Together</div>
+    <h2 class="font-display text-5xl md:text-7xl leading-none mb-8 reveal delay-1">
+      Ready to Transform<br/><span style="color:var(--yellow)">Your Space?</span>
+    </h2>
+    <p class="text-lg mb-12 reveal delay-2" style="color:#888; font-weight:300; max-width:520px; margin-left:auto; margin-right:auto; line-height:1.9;">
+      Get in touch today for a <strong style="color:var(--white)">free consultation and site visit.</strong> We're just one message away on WhatsApp, Facebook, or a call.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-4 reveal delay-3">
+      <a href="https://wa.me/923221233042?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20aluminium%20windows" target="_blank" class="whatsapp-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a href="https://facebook.com" target="_blank" class="btn-outline" style="gap:10px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--yellow)"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook Page
+      </a>
+    </div>
+
+    <!-- Contact info line -->
+    <div class="mt-14 flex flex-wrap justify-center gap-8 reveal delay-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 flex items-center justify-center" style="background:rgba(245,196,0,0.1); border:1px solid rgba(245,196,0,0.2)">📍</div>
+        <span style="color:#777; font-size:0.9rem;">Lahore, Pakistan</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 flex items-center justify-center" style="background:rgba(245,196,0,0.1); border:1px solid rgba(245,196,0,0.2)">📞</div>
+        <span style="color:#777; font-size:0.9rem;">+92 322 123 3042</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 flex items-center justify-center" style="background:rgba(245,196,0,0.1); border:1px solid rgba(245,196,0,0.2)">⏰</div>
+        <span style="color:#777; font-size:0.9rem;">Mon–Sat: 10am – 7pm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="pt-20 pb-8 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Top footer -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+      <!-- Brand -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 flex items-center justify-center" style="background:var(--yellow)">
+            <span class="font-display text-xl text-black">A</span>
+          </div>
+          <span class="footer-logo">MA <span style="color:var(--yellow)">ALUMINIUM AND GLASS</span></span>
+        </div>
+        <p class="mb-6 max-w-sm" style="color:#555; font-weight:300; line-height:1.8; font-size:0.9rem;">
+          Lahore's trusted aluminium window and glass specialists. Crafting clarity, framing light, and building trust one window at a time since 2010.
+        </p>
+        <div class="flex gap-3">
+          <a href="https://wa.me/923221233042" target="_blank" class="social-icon" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="tel:+923221233042" class="social-icon" aria-label="Call">📞</a>
+        </div>
+      </div>
+
+      <!-- Services Links -->
+      <div>
+        <div class="font-condensed font-bold text-sm tracking-widest uppercase mb-5" style="color:var(--yellow)">Services</div>
+        <a href="#services" class="footer-link">Aluminium Windows</a>
+        <a href="#services" class="footer-link">Glass Fitting</a>
+        <a href="#services" class="footer-link">Sliding Doors</a>
+        <a href="#services" class="footer-link">Custom Fabrication</a>
+        <a href="#services" class="footer-link">Safety Grilles</a>
+        <a href="#services" class="footer-link">Repair & Maintenance</a>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <div class="font-condensed font-bold text-sm tracking-widest uppercase mb-5" style="color:var(--yellow)">Quick Links</div>
+        <a href="#gallery" class="footer-link">Our Gallery</a>
+        <a href="#why-us" class="footer-link">Why Choose Us</a>
+        <a href="#process" class="footer-link">How We Work</a>
+        <a href="#testimonials" class="footer-link">Client Reviews</a>
+        <a href="#contact" class="footer-link">Get a Free Quote</a>
+        <a href="https://wa.me/923221233042" class="footer-link" target="_blank">WhatsApp Business</a>
+      </div>
+
+    </div>
+
+    <!-- Yellow divider -->
+    <div class="glow-line mb-8"></div>
+
+    <!-- Bottom footer -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <p style="color:#444; font-size:0.8rem;">
+        © 2025 MA Aluminium and Glass. All rights reserved. Made with 🔨 in Lahore.
+      </p>
+      <p style="color:#333; font-size:0.8rem;">
+        Built with honest craft & genuine care.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+  // ── Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 80);
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+      ring.style.opacity = '0.8';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // ── Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── Mobile menu
+  const toggle = document.getElementById('menu-toggle');
+  const mMenu = document.getElementById('mobile-menu');
+  const close = document.getElementById('menu-close');
+  toggle.addEventListener('click', () => mMenu.classList.add('open'));
+  close.addEventListener('click', () => mMenu.classList.remove('open'));
+  mMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mMenu.classList.remove('open')));
+
+  // ── Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── Counter animation
+  function animateCounter(el) {
+    const target = +el.dataset.target;
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current) + '+';
+    }, 16);
+  }
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter-num[data-target]').forEach(el => counterObserver.observe(el));
+
+  // ── Hero reveal on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 150);
+    });
+  });
+</script>
+
+</body>
+</html>
